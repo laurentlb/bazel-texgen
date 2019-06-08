@@ -74,6 +74,13 @@ static float	Dot_prod(float x1, char x2,
   return Prod(x1, x2) + Prod(y1, y2) + Prod(z1, z2) + Prod(t1, t2);
 }
 
+static float ifloorf(float x) {
+  if (x < 0) {
+    return (int) x - 1;
+  }
+  return (int) x;
+}
+
 //
 // Noise function, returning the Perlin Noise at a given point
 //
@@ -83,10 +90,10 @@ float			Noise(float x, float y, float z, float t)
     InitNoise();
 
   // The unit hypercube containing the point
-  const int x1 = int(x);
-  const int y1 = int(y);
-  const int z1 = int(z);
-  const int t1 = int(t);
+  const int x1 = ifloorf(x);
+  const int y1 = ifloorf(y);
+  const int z1 = ifloorf(z);
+  const int t1 = ifloorf(t);
 
   const int x2 = x1 + 1;
   const int y2 = y1 + 1;
