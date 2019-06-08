@@ -1,5 +1,4 @@
 #include "src/export.hh"
-#include "src/interpolation.hxx"
 #include "src/texture.hh"
 
 int main() {

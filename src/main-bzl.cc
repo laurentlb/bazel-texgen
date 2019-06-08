@@ -1,10 +1,10 @@
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "src/export.hh"
 #include "src/texture.hh"
 
-typedef Texture::Channel(*fctType)(int argc, const char* argv[]);
+typedef Texture::Channel (*fctType)(int argc, const char* argv[]);
 
 const int size = 4 * 1024;
 
@@ -25,8 +25,8 @@ const struct {
   fctType callback;
   int arguments;
 } allFunctions[] = {
-  {"diamond", diamond, 0},
-  {"conic", conic, 0},
+    {"diamond", diamond, 0},
+    {"conic", conic, 0},
 };
 
 int main(int argc, const char* argv[]) {
@@ -40,12 +40,12 @@ int main(int argc, const char* argv[]) {
   int remainingArgc = argc - 3;
   const char** remainingArgv = argv + 3;
 
-  for (int i = 0; i < sizeof(allFunctions)/sizeof(allFunctions[0]); i++) {
+  for (int i = 0; i < sizeof(allFunctions) / sizeof(allFunctions[0]); i++) {
     const auto& function = allFunctions[i];
     if (strcmp(argv[2], function.name) == 0) {
       if (remainingArgc != function.arguments) {
-        printf("op `%s` expected %d args, got %d\n",
-               op, function.arguments, remainingArgc);
+        printf("op `%s` expected %d args, got %d\n", op, function.arguments,
+               remainingArgc);
         return 1;
       }
       Texture::Channel t = function.callback(remainingArgc, remainingArgv);
