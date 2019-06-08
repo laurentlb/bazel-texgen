@@ -4,6 +4,12 @@ cc_binary(
     deps = [":textures"],
 )
 
+cc_binary(
+    name = "texgen-bzl",
+    srcs = ["main-bzl.cc"],
+    deps = [":textures"],
+)
+
 cc_library(
     name = "textures",
     srcs = glob(
