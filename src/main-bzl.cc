@@ -20,13 +20,29 @@ Texture::Channel conic(int argc, const char* argv[]) {
   return t;
 }
 
+Texture::Channel add(int argc, const char* argv[]) {
+  Texture::Channel t1 = Load(argv[0]);
+  Texture::Channel t2 = Load(argv[1]);
+  t1 += t2;
+  return t1;
+}
+
+Texture::Channel mult(int argc, const char* argv[]) {
+  Texture::Channel t1 = Load(argv[0]);
+  Texture::Channel t2 = Load(argv[1]);
+  t1 *= t2;
+  return t1;
+}
+
 const struct {
   const char* name;
   fctType callback;
   int arguments;
 } allFunctions[] = {
-    {"diamond", diamond, 0},
+    {"add", add, 2},
     {"conic", conic, 0},
+    {"diamond", diamond, 0},
+    {"mult", mult, 2},
 };
 
 int main(int argc, const char* argv[]) {
@@ -50,6 +66,7 @@ int main(int argc, const char* argv[]) {
       }
       Texture::Channel t = function.callback(remainingArgc, remainingArgv);
       Export(output, t);
+      return 0;
     }
   }
 

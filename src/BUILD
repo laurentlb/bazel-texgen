@@ -7,6 +7,7 @@ cc_binary(
 cc_binary(
     name = "texgen-bzl",
     srcs = ["main-bzl.cc"],
+    visibility = ["//:__pkg__"],
     deps = [":textures"],
 )
 

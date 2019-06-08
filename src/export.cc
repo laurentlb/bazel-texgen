@@ -1,4 +1,5 @@
 #include "src/interpolation.hxx"
+#include "src/stb_image.hh"
 #include "src/stb_image_write.hh"
 #include "src/texture.hh"
 
@@ -14,4 +15,12 @@ void Export(const char* filename, const Texture::Channel& a) {
   }
   stbi_write_png(filename, a.Width(), a.Height(), 1, buffer, 0);
   free(buffer);
+}
+
+Texture::Channel Load(const char* filename) {
+  int x,y,n;
+  unsigned char *data = stbi_load(filename, &x, &y, &n, 1);
+  Texture::Channel t(x, y, data, 1);
+  stbi_image_free(data);
+  return t;
 }
